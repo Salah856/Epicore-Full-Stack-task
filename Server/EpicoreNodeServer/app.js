@@ -2,15 +2,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const graphqlHttp = require('express-graphql');
 const { buildSchema } = require('graphql');
-
+const cors = require('cors');
 import CouponService from './CouponService/couponService';
 import MongoConnection from './MongoService/mongoConnection';
 
 const { getCoupon, createCoupon } = new CouponService();
-
 const { connect } = new MongoConnection();
 
 const app = express();
+
+app.use(cors());
 app.use(bodyParser.json());
 
 app.use('/graphql', graphqlHttp({
