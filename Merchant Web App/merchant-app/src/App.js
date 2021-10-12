@@ -7,7 +7,8 @@ import {
 
 import './App.css';
 import AppBar from './Navbar';
-import CreateCoupon from './components/CreateCoupon'
+import CreateCoupon from './components/CreateCoupon'; 
+import ApplyCoupon from './components/ApplyCoupon'; 
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
             <CreateCoupon />
           </Route>
           <Route path="/apply-coupon">
-            {/* <ApplyCoupon /> */}
+            <ApplyCoupon />
           </Route>
         </Switch>
       </Router>
