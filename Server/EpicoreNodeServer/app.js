@@ -14,6 +14,14 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+// const authMiddleware = (req, res, next) => {
+//     const token = req.headers.authorization || ""; 
+//     if (token === process.env.token) next();
+//     res.send('401! not authenticated'); 
+// }
+
+// app.use(authMiddleware); 
+
 app.use('/graphql', graphqlHttp({
 
     schema: epicoreGraphQLSchema,

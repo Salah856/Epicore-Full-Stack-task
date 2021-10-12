@@ -2,6 +2,7 @@
     "env": {
         "MONGO_USER": "Allah012",
         "MONGO_PASSWORD": "SalahElhossiny",
-        "MONGO_DB": "Cluster0"
+        "MONGO_DB": "Cluster0", 
+        "token": "epicore_token"
     }
 }
