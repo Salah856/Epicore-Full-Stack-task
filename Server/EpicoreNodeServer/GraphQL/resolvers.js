@@ -5,8 +5,8 @@ const resolvers = {
     getCoupon: ({ code }) => {
         getCoupon(code);
     },
-    createCoupon: ({ couponInput }) => {
-        const { code, foodItemName, expiryDate, text } = couponInput;
+    createCoupon: ({ input }) => {
+        const { code, foodItemName, expiryDate, text } = input;
         createCoupon(code, text, foodItemName, expiryDate);
     },
 }

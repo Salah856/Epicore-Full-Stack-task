@@ -9,8 +9,8 @@ const CREATE_COUPON = gql`
         code: Number!
     }
 
-    mutation couponMutation($couponInput: CouponInput!){
-        createCoupon(couponInput: $couponInput){
+    mutation couponMutation($input: CouponInput!){
+        createCoupon(input: $input){
             _id
             code
             text
