@@ -6,22 +6,26 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { useSnackbar } from 'notistack';
 
+import { useMutation } from '@apollo/client';
 import {
   Box, Button, Card, CardContent,
   Divider, FormHelperText,
   Grid, TextField, makeStyles
 } from '@material-ui/core';
 
+import CREATE_COUPON from '../GraphQL/mutations/createCoupon';
 import generateCouponCode from '../utils/generateCouponCode';
 
 const useStyles = makeStyles(() => ({
   root: {}
 }));
 
+
 const CreateCoupon = ({ className, ...rest }) => {
   
     const classes = useStyles();
     const { enqueueSnackbar } = useSnackbar();
+    const [ createCoupon, {data, error, loading} ] = useMutation(CREATE_COUPON); 
 
    return (
     <Formik
@@ -52,14 +56,19 @@ const CreateCoupon = ({ className, ...rest }) => {
                 code: generateCouponCode()
             }
 
+          createCoupon(coupon);
           
+          
+
           resetForm();
           setStatus({ success: true });
           setSubmitting(false);
           
-          enqueueSnackbar('Coupon updated', {
-            variant: 'success'
-          });
+          if(!error) {
+              enqueueSnackbar('Coupon updated', {
+              variant: 'success'
+            });
+          }
         } catch (err) {
           console.error(err);
           setStatus({ success: false });

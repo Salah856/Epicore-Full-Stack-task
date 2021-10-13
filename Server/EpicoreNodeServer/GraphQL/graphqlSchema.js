@@ -4,11 +4,11 @@ const { buildSchema } = require('graphql');
 const epicoreGraphQLSchema = buildSchema(`
 
         type Coupon {
-        _id: ID!
-        foodItemName: String!
-        text: String!
-        expiryDate: Date!
-        code: Number!
+            _id: ID!
+            foodItemName: String!
+            text: String!
+            expiryDate: Date!
+            code: Number!
         }
 
         input CouponInput {

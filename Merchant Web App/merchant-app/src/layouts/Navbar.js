@@ -1,6 +1,5 @@
 import * as React from 'react';
 import AppBar from '@material-ui/core/AppBar';
-import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -12,7 +11,6 @@ import Grid from '@material-ui/core/Grid';
 
 export default function NavBar() {
   return (
-    // <Box sx={{ flexGrow: 2 }}>
       <AppBar position="static" style={{width: '100%'}}>
         <Grid container spacing={2} columns={16}>
           <Toolbar style={{width: '100%'}}>
@@ -45,6 +43,5 @@ export default function NavBar() {
           </Toolbar>
         </Grid>
       </AppBar>
-    // </Box>
   );
 }
