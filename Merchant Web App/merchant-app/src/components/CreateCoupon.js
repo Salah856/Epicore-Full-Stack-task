@@ -12,6 +12,7 @@ import {
   Grid, TextField, makeStyles
 } from '@material-ui/core';
 
+import generateCouponCode from '../utils/generateCouponCode';
 
 const useStyles = makeStyles(() => ({
   root: {}
@@ -46,9 +47,9 @@ const CreateCoupon = ({ className, ...rest }) => {
 
             const coupon = {
                 foodItemName: values.foodItemName, 
-                expiryDate: values.expiryDate, 
+                expiryDate: new Date(values.expiryDate), 
                 text: values.text, 
-                code: parseInt(Math.random().toFixed(8).split('.')[1])
+                code: generateCouponCode()
             }
 
           
