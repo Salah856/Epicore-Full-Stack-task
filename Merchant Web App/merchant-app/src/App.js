@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 
 import './App.css';
-import AppBar from './Navbar';
+import AppBar from './layouts/Navbar';
 import CreateCoupon from './components/CreateCoupon'; 
 import ApplyCoupon from './components/ApplyCoupon'; 
 import Box from '@material-ui/core/Box';
