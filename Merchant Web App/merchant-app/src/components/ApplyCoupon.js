@@ -30,9 +30,11 @@ const ApplyCoupon = ({ className, ...rest }) => {
         submit: null
       }}
       validationSchema={Yup.object().shape({
-        expiryDate: Yup.date().required(),
-        text: Yup.string().max(255),
-        foodItemName: Yup.string().max(255),
+        code: Yup.string()
+        .required()
+        .matches(/^[0-9]+$/, "Must be only digits")
+        .min(8, 'Must be exactly 8 digits')
+        .max(8, 'Must be exactly 8 digits')
       })}
       onSubmit={async (values, {
         resetForm,
@@ -42,19 +44,14 @@ const ApplyCoupon = ({ className, ...rest }) => {
       }) => {
         try {
 
-            const coupon = {
-                foodItemName: values.foodItemName, 
-                expiryDate: values.expiryDate, 
-                text: values.text, 
-                code: parseInt(Math.random().toFixed(8).split('.')[1])
-            }
+        
+         // sending redeem coupon graphql
 
-          
           resetForm();
           setStatus({ success: true });
           setSubmitting(false);
           
-          enqueueSnackbar('Coupon updated', {
+          enqueueSnackbar('Coupon Redeemed Successfully!', {
             variant: 'success'
           });
         } catch (err) {
@@ -90,50 +87,14 @@ const ApplyCoupon = ({ className, ...rest }) => {
                   xs={12}
                 >
                   <TextField
-                    error={Boolean(touched.text && errors.text)}
+                    error={Boolean(touched.code && errors.code)}
                     fullWidth
-                    helperText={touched.text && errors.text}
-                    label="Coupon Text"
-                    name="Coupon text"
+                    helperText={touched.code && errors.code}
+                    label="Enter Coupon Code"
+                    name="code"
                     onBlur={handleBlur}
                     onChange={handleChange}
-                    value={values.text}
-                    variant="outlined"
-                  />
-                </Grid>
-                <Grid
-                  item
-                  md={6}
-                  xs={12}
-                >
-                  <TextField
-                    error={Boolean(touched.foodItemName && errors.foodItemName)}
-                    fullWidth
-                    helperText={touched.foodItemName && errors.foodItemName ? errors.foodItemName : 'Name of Food Item'}
-                    label="Food Item Name"
-                    name="foodItemName"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    required
-                    type="email"
-                    value={values.foodItemName}
-                    variant="outlined"
-                  />
-                </Grid>
-                <Grid
-                  item
-                  md={6}
-                  xs={12}
-                >
-                  <TextField
-                    error={Boolean(touched.expiryDate && errors.expiryDate)}
-                    fullWidth
-                    helperText={touched.expiryDate && errors.expirtDate}
-                    label="Coupon Expiry Date"
-                    name="expiryDate"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.expiryDate}
+                    value={values.code}
                     variant="outlined"
                   />
                 </Grid>
@@ -158,7 +119,7 @@ const ApplyCoupon = ({ className, ...rest }) => {
                 type="submit"
                 variant="contained"
               >
-                Save Changes
+                Redeem Coupon Code
               </Button>
             </Box>
           </Card>
@@ -172,5 +133,5 @@ ApplyCoupon.propTypes = {
   className: PropTypes.string,
 };
 
-export default CreateCoupon;
+export default ApplyCoupon;
 
