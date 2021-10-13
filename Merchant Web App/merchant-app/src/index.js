@@ -6,10 +6,11 @@ import App from './App';
 
 import reportWebVitals from './reportWebVitals';
 import { SnackbarProvider } from "notistack";
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'; 
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import splitLink from './apolloSetup'; 
 
 const client = new ApolloClient({
-  uri: 'http://localhost:5000/graphql', 
+  splitLink,
   cache: new InMemoryCache()
 });
 
