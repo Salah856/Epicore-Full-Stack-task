@@ -7,33 +7,44 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/core/Menu';
 import { Link } from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
+
 
 export default function NavBar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} style={{color: 'white', marginLeft: '100px'}}>
-              Merchant App
-          </Typography>
-
-          <Link to="/create-coupon">
-            <Button style={{flexGrow: 1, color: 'white', marginRight: '100px', marginLeft: '200px'}}> Create Coupon </Button>
-          </Link>
-          <Link to="/apply-coupon">
-            <Button style={{flexGrow: 1, color: 'white', marginLeft: '100px'}}> Apply Coupon </Button>
-          </Link>
-        </Toolbar>
+    // <Box sx={{ flexGrow: 2 }}>
+      <AppBar position="static" style={{width: '100%'}}>
+        <Grid container spacing={2} columns={16}>
+          <Toolbar style={{width: '100%'}}>
+            <Grid item xs={6}>
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                sx={{ mr: 1 }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Link to="/">
+                <Typography variant="h6" component="div" style={{color: 'white'}}>
+                    Merchant App
+                </Typography>
+              </Link>
+            </Grid>
+            <Grid item xs={5}>
+              <Link to="/create-coupon">
+                <Button style={{color: 'white'}}> Create Coupon </Button>
+              </Link>
+            </Grid>
+            <Grid item xs={5}>
+              <Link to="/apply-coupon">
+                <Button style={{color: 'white'}}> Apply Coupon </Button>
+              </Link>
+            </Grid>
+          </Toolbar>
+        </Grid>
       </AppBar>
-    </Box>
+    // </Box>
   );
 }
