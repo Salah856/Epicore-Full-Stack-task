@@ -9,6 +9,7 @@ import './App.css';
 import AppBar from './Navbar';
 import CreateCoupon from './components/CreateCoupon'; 
 import ApplyCoupon from './components/ApplyCoupon'; 
+import Box from '@material-ui/core/Box';
 
 function App() {
   return (
@@ -17,10 +18,14 @@ function App() {
         <AppBar/>
         <Switch>
           <Route path="/create-coupon">
-            <CreateCoupon />
+            <Box mt={12}>
+              <CreateCoupon />
+            </Box>
           </Route>
           <Route path="/apply-coupon">
-            <ApplyCoupon />
+            <Box mt={12}>
+              <ApplyCoupon />
+            </Box>
           </Route>
         </Switch>
       </Router>
