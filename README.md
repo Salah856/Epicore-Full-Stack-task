@@ -72,3 +72,5 @@ Here is a snapshot from the typeDefs:
 
 ```
 
+I used many to many between coupon and mobile app client because I find this approach can be scaled because coupon can be related to many clients and one client can have many coupons for different food items. 
+
