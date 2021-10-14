@@ -57,7 +57,6 @@ const startApolloServer = async () =>{
 
 startApolloServer();
 
-//apolloServer.applyMiddleware({ app });
 
 const PORT = 5000;
 
