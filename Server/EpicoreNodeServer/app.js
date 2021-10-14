@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const { ApolloServer } = require('apollo-server');
+const { ApolloServer } = require('apollo-server-express');
 const cors = require('cors');
 
 const { createServer } = require('http');
@@ -12,7 +12,7 @@ const {MongoConnection} = require('./MongoService/mongoConnection');
 
 const {schema} = require('./GraphQL/schema');
 
-const { connect } = new s.MongoConnection();
+const { connect } = new MongoConnection();
 const app = express();
 const httpServer = createServer(app);
 
@@ -51,10 +51,13 @@ const subscriptionServer = SubscriptionServer.create({
 
 const startApolloServer = async () =>{
     await apolloServer.start();
+    apolloServer.applyMiddleware({ app });
+
 }
 
 startApolloServer();
-apolloServer.applyMiddleware({ app });
+
+//apolloServer.applyMiddleware({ app });
 
 const PORT = 5000;
 

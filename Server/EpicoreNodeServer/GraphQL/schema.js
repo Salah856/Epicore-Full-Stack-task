@@ -4,25 +4,27 @@ const {CouponService} = require('../CouponService/couponService');
 const {makeExecutableSchema} = require('@graphql-tools/schema');
 
 const { createCoupon, getCoupon } = new CouponService();
-const {couponRedeemed} = require('./subscriptions');
 
 const typeDefs = `
 
     input CouponInput {
       text: String
-      code: Number
+      code: Int
       expiryDate: String
     }
 
+    input Code {
+      code: Int
+    }
     type Coupon {
       _id: ID
       text: String
-      code: Number
+      code: Int
       expiryDate: String
     }
 
     type Query {
-      redeemCoupon(code: Number!): Coupon
+      redeemCoupon(code: Int): Coupon
     }
 
 
@@ -30,7 +32,9 @@ const typeDefs = `
       createCoupon(coupon: CouponInput!): Coupon
     }
 
-    ${couponRedeemed}
+    type Subscription {
+      couponRedeemed(code: Code): Coupon
+    }
     ,
 
 `; 
@@ -38,7 +42,7 @@ const typeDefs = `
 
 const resolvers = {
     Query: {
-      reedemCoupon: async (parent, args, context) => {
+      redeemCoupon: async (parent, args, context) => {
 
         const coupon = getCoupon(args.code);
         pubSub.publish('couponRedeemed', { couponRedeemed: coupon });
@@ -46,7 +50,7 @@ const resolvers = {
     },
   },
   Mutation: {
-    reedemCoupon: async (parent, args, context) => {
+    createCoupon: async (parent, args, context) => {
       const {code, text, foodItemName, expiryDate} = args; 
       return createCoupon(code, text, foodItemName, expiryDate);
 
@@ -54,8 +58,8 @@ const resolvers = {
   },
   
   Subscription:{
-      couponRedeemed:{
-         subscribe: () => pubsub.asyncIterator(['couponRedeemed']),
+      couponRedeemed: {
+         subscribe: ({code}) => pubsub.asyncIterator(['couponRedeemed']),
       }
   }
 }
