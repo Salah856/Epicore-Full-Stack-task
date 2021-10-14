@@ -6,6 +6,9 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { useSnackbar } from 'notistack';
 
+import REDEEM_COUPON from '../GraphQL/queries/redeemCoupon';
+//import { useQuery } from '@apollo/client';
+
 import {
   Box, Button, Card, CardContent,
   Divider, FormHelperText,
@@ -21,6 +24,8 @@ const ApplyCoupon = ({ className, ...rest }) => {
   
     const classes = useStyles();
     const { enqueueSnackbar } = useSnackbar();
+
+    // const { loading, error, data } = useQuery(REDEEM_COUPON);
 
    return (
     <Formik

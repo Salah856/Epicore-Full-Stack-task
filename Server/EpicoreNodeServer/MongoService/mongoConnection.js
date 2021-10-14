@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-
 class MongoConnection{
 
     constructor(){
@@ -18,4 +17,5 @@ class MongoConnection{
     }
 }
 
-export default MongoConnection; 
+
+module.exports={MongoConnection}; 

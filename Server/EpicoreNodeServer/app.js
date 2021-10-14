@@ -1,18 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-// const graphqlHttp = require('express-graphql');
 const { ApolloServer } = require('apollo-server');
 const cors = require('cors');
 
-import { createServer } from 'http';
-import { execute, subscribe } from 'graphql';
-import { SubscriptionServer } from 'subscriptions-transport-ws';
+const { createServer } = require('http');
+const { execute, subscribe } = require('graphql');
+const { SubscriptionServer } = require('subscriptions-transport-ws');
 
-import MongoConnection from './MongoService/mongoConnection';
-import schema from './GraphQL/schema';
+const {MongoConnection} = require('./MongoService/mongoConnection');
 
-const { connect } = new MongoConnection();
+const {schema} = require('./GraphQL/schema');
+
+const { connect } = new s.MongoConnection();
 const app = express();
 const httpServer = createServer(app);
 

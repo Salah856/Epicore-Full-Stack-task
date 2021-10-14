@@ -1,39 +1,69 @@
-import gql from "graphql-tag";
-import { makeExecutableSchema } from "@graphql-tools/schema";
+const {PubSub} = require('apollo-server'); 
+const pubSub = new PubSub();
+const {CouponService} = require('../CouponService/couponService');
+const {makeExecutableSchema} = require('@graphql-tools/schema');
 
-import CouponTypes from "./types";
-import CouponQueries from "./queries";
-import CouponMutations from "./mutations";
-import CouponSubscriptions from './subscriptions';
+const { createCoupon, getCoupon } = new CouponService();
+const {couponRedeemed} = require('./subscriptions');
 
+const typeDefs = `
 
-const schema = {
-  typeDefs: gql`
-    ${CouponTypes}
+    input CouponInput {
+      text: String
+      code: Number
+      expiryDate: String
+    }
+
+    type Coupon {
+      _id: ID
+      text: String
+      code: Number
+      expiryDate: String
+    }
 
     type Query {
       redeemCoupon(code: Number!): Coupon
     }
 
+
     type Mutation {
       createCoupon(coupon: CouponInput!): Coupon
     }
 
-    ${CouponSubscriptions}
-  `,
-  resolvers: {
-    Query: {
-      ...CouponQueries,
-    },
-    Mutation: {
-      ...CouponMutations,
-    },
-    Subscription:{
-        couponRedeemed:{
-            subscribe: () => pubsub.asyncIterator(['couponRedeemed']),
-        }
-    }
-  },
-};
+    ${couponRedeemed}
+    ,
 
-export default makeExecutableSchema(schema);
+`; 
+
+
+const resolvers = {
+    Query: {
+      reedemCoupon: async (parent, args, context) => {
+
+        const coupon = getCoupon(args.code);
+        pubSub.publish('couponRedeemed', { couponRedeemed: coupon });
+        return couponRedeemed;
+    },
+  },
+  Mutation: {
+    reedemCoupon: async (parent, args, context) => {
+      const {code, text, foodItemName, expiryDate} = args; 
+      return createCoupon(code, text, foodItemName, expiryDate);
+
+    },
+  },
+  
+  Subscription:{
+      couponRedeemed:{
+         subscribe: () => pubsub.asyncIterator(['couponRedeemed']),
+      }
+  }
+}
+
+const schema = makeExecutableSchema({
+  typeDefs, 
+  resolvers
+}); 
+
+
+module.exports = {schema}

@@ -9,6 +9,5 @@ const couponRedeemed = `
 `; 
 
 
-export default couponRedeemed; 
 
-
+module.exports={couponRedeemed}

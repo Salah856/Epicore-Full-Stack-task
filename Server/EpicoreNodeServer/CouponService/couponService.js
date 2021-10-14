@@ -1,4 +1,4 @@
-const Coupon = require('./models/couponSchema'); 
+const Coupon = require('../models/couponSchema'); 
 const { v4: uuidv4 } = require('uuid');
 
 class CouponService{
@@ -36,5 +36,4 @@ class CouponService{
     }
 }
 
-
-export default CouponService; 
+module.exports = { CouponService }
