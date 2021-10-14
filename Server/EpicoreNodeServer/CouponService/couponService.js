@@ -7,7 +7,7 @@ class CouponService{
 
     }
 
-    getCoupon(code){
+    getCouponByCode(code){
         Coupon.find({code: code}).then((res)=>{
             return res;
         }).catch((err) =>{
@@ -15,6 +15,13 @@ class CouponService{
         }); 
     }
 
+    getCouponByFoodItemName(foodItemName){
+        Coupon.find({foodItemName: foodItemName}).then((res)=>{
+            return res; 
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }
     createCoupon(code, text, foodItemName, expiryDate){
 
         const coupon = new Coupon({
