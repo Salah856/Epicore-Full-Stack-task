@@ -25,7 +25,7 @@ Here is a snapshot from the typeDefs:
 
 ```gql
 
-     input CouponInput {
+    input CouponInput {
       text: String
       code: Int
       expiryDate: String
