@@ -60,7 +60,7 @@ const resolvers = {
     Query: {
       getCouponByFoodItem: async (parent, args, context)=>{
 
-        const coupon = getCouponByFoodItemName(args.foodItemName); 
+        const coupon = getCouponByFoodItemName(args.foodItemName, args.clientID); 
         return coupon;
     }
   },

@@ -15,13 +15,20 @@ class CouponService{
         }); 
     }
 
-    getCouponByFoodItemName(foodItemName){
-        Coupon.find({foodItemName: foodItemName}).then((res)=>{
-            return res; 
-        }).catch((err)=>{
-            console.log(err)
-        })
+    getCouponByFoodItemName(foodItemName, clientID){
+        Coupon.update(
+            {
+                foodItemName: foodItemName
+            },
+            {
+                $set: { userID: clientID }
+            }).then((res)=>{
+                return res; 
+            }).catch((err)=>{
+                console.log(err)
+            })
     }
+    
     createCoupon(code, text, foodItemName, expiryDate){
 
         const coupon = new Coupon({
