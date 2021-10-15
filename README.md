@@ -25,7 +25,7 @@ Here is a snapshot from the typeDefs:
 
 ```gql
 
-    input CouponInput {
+     input CouponInput {
       text: String
       code: Int
       expiryDate: String
@@ -33,12 +33,6 @@ Here is a snapshot from the typeDefs:
 
     input Code {
       code: Int
-    }
-
-    type User {
-      _id: ID
-      userName: String
-      coupons: [Coupon]
     }
 
     type Merchant {
@@ -53,24 +47,59 @@ Here is a snapshot from the typeDefs:
       code: Int
       expiryDate: String
       merchant: Merchant
-      users: [User] 
+      userID: String
+      requested: Boolean
+      redeemed: Boolean
     }
 
     type Query {
-      redeemCoupon(code: Int): Coupon
       getCouponByFoodItem(foodItemName: String): Coupon
     }
 
 
     type Mutation {
       createCoupon(coupon: CouponInput!): Coupon
+      redeemCoupon(code: Int): Coupon
     }
 
     type Subscription {
       couponRedeemed(code: Code): Coupon
     }
+    ,
 
 ```
 
-I used many to many between coupon and mobile app client because I find this approach can be scaled because coupon can be related to many clients and one client can have many coupons for different food items. 
+CouponSchema in MongoDB: 
+
+```json
+ text: {
+        type: String,
+        required: true
+    },
+    code: {
+        type: Number,
+        required: true
+    },
+    foodItemName: {
+        type: String,
+        required: true
+    },
+    expiryDate: {
+        type: Date,
+        required: true
+    }, 
+    userID: {
+        type: String,
+        default: null
+    }, 
+    requested: {
+        type: Boolean, 
+        default: false
+    }, 
+    redeemed:{
+        type: Boolean, 
+        default: false
+    }
+
+```
 

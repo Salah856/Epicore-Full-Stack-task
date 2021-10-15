@@ -19,6 +19,18 @@ const couponSchema = new Schema({
     expiryDate: {
         type: Date,
         required: true
+    }, 
+    userID: {
+        type: String,
+        default: null
+    }, 
+    requested: {
+        type: Boolean, 
+        default: false
+    }, 
+    redeemed:{
+        type: Boolean, 
+        default: false
     }
 
 }); 

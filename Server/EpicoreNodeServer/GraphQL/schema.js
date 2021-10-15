@@ -21,12 +21,6 @@ const typeDefs = `
       code: Int
     }
 
-    type User {
-      _id: ID
-      userName: String
-      coupons: [Coupon]
-    }
-
     type Merchant {
       _id: ID
       merchantName: String
@@ -39,17 +33,19 @@ const typeDefs = `
       code: Int
       expiryDate: String
       merchant: Merchant
-      users: [User] 
+      userID: String
+      requested: Boolean
+      redeemed: Boolean
     }
 
     type Query {
-      redeemCoupon(code: Int): Coupon
       getCouponByFoodItem(foodItemName: String): Coupon
     }
 
 
     type Mutation {
       createCoupon(coupon: CouponInput!): Coupon
+      redeemCoupon(code: Int): Coupon
     }
 
     type Subscription {
@@ -62,16 +58,10 @@ const typeDefs = `
 
 const resolvers = {
     Query: {
-      redeemCoupon: async (parent, args, context) => {
+      getCouponByFoodItem: async (parent, args, context)=>{
 
-        const coupon = getCouponByCode(args.code);
-        pubSub.publish('couponRedeemed', { couponRedeemed: coupon });
-        return couponRedeemed;
-    },
-    getCouponByFoodItem: async (parent, args, context)=>{
-
-      const coupon = getCouponByFoodItemName(args.foodItemName); 
-      return coupon;
+        const coupon = getCouponByFoodItemName(args.foodItemName); 
+        return coupon;
     }
   },
   Mutation: {
@@ -79,6 +69,12 @@ const resolvers = {
       const {code, text, foodItemName, expiryDate} = args; 
       return createCoupon(code, text, foodItemName, expiryDate);
 
+    },
+    redeemCoupon: async (parent, args, context) => {
+
+      const coupon = getCouponByCode(args.code);
+      pubSub.publish('couponRedeemed', { couponRedeemed: coupon });
+      return couponRedeemed;
     },
   },
   
