@@ -7,7 +7,7 @@ class CouponService{
 
     }
 
-    getCouponByCode(code){
+    redeemCouponByCode(code){
         Coupon.find({code: code}).then((res)=>{
             return res;
         }).catch((err) =>{
@@ -15,7 +15,7 @@ class CouponService{
         }); 
     }
 
-    getCouponByFoodItemName(foodItemName, clientID){
+    requestCouponByFoodItemName(foodItemName, clientID){
         Coupon.update(
             {
                 foodItemName: foodItemName

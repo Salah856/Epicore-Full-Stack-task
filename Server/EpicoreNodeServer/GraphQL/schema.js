@@ -5,8 +5,8 @@ const {makeExecutableSchema} = require('@graphql-tools/schema');
 
 const { 
   createCoupon, 
-  getCouponByCode, 
-  getCouponByFoodItemName 
+  redeemCouponByCode,
+  requestCouponByFoodItemName 
 } = new CouponService();
 
 const typeDefs = `
@@ -58,9 +58,9 @@ const typeDefs = `
 
 const resolvers = {
     Query: {
-      getCouponByFoodItem: async (parent, args, context)=>{
+      requestCouponByFoodItem: async (parent, args, context)=>{
 
-        const coupon = getCouponByFoodItemName(args.foodItemName, args.clientID); 
+        const coupon = requestCouponByFoodItemName(args.foodItemName, args.clientID); 
         return coupon;
     }
   },
@@ -72,7 +72,7 @@ const resolvers = {
     },
     redeemCoupon: async (parent, args, context) => {
 
-      const coupon = getCouponByCode(args.code);
+      const coupon = redeemCouponByCode(args.code);
       pubSub.publish('couponRedeemed', { couponRedeemed: coupon });
       return couponRedeemed;
     },
