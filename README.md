@@ -71,7 +71,7 @@ Here is a snapshot from the typeDefs:
 
 CouponSchema in MongoDB: 
 
-```json
+```js
  text: {
         type: String,
         required: true
