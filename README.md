@@ -17,8 +17,6 @@ The app covers these steps:
 4. The end user will get the notification with the question.
 
 
-The schema architecture is built on assuming that merchant has many coupons that he can create and coupon has many users as the same offer can be sent to many clients 
-
 You can find the schema easily from './Server/EpicoreNodeServer/GraphQL/schema'
 
 Here is a snapshot from the typeDefs: 
