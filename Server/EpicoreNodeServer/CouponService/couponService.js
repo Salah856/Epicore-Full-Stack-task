@@ -8,12 +8,16 @@ class CouponService{
     }
 
     redeemCouponByCode(code){
-        Coupon.update(
+        Coupon.findOneAndUpdate(
             {
                 code: code
             }, 
             {
-                $set: {redeemed: true}
+                $set: {
+                    redeemed: true
+                }
+            }, {
+                new: true
             }
         ).then((res)=>{
             return res;
@@ -23,12 +27,18 @@ class CouponService{
     }
 
     requestCouponByFoodItemName(foodItemName, clientID){
-        Coupon.update(
+        Coupon.findOneAndUpdate(
             {
                 foodItemName: foodItemName
             },
             {
-                $set: { userID: clientID, requested: true }
+                $set: { 
+                    userID: clientID, 
+                    requested: true 
+                }
+            }, 
+            {
+                new: true
             }).then((res)=>{
                 return res; 
             }).catch((err)=>{
