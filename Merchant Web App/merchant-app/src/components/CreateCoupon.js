@@ -51,15 +51,13 @@ const CreateCoupon = ({ className, ...rest }) => {
 
             const coupon = {
                 foodItemName: values.foodItemName, 
-                expiryDate: new Date(values.expiryDate), 
+                expiryDate: values.expiryDate, 
                 text: values.text, 
-                code: generateCouponCode()
+                code: generateCouponCode(), 
             }
 
-          createCoupon(coupon);
+          createCoupon({variables: {...coupon}});
           
-          
-
           resetForm();
           setStatus({ success: true });
           setSubmitting(false);

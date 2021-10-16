@@ -6,8 +6,8 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { useSnackbar } from 'notistack';
 
-import REDEEM_COUPON from '../GraphQL/queries/redeemCoupon';
-//import { useQuery } from '@apollo/client';
+import REDEEM_COUPON from '../GraphQL/mutations/redeemCoupon';
+import { useMutation } from '@apollo/client';
 
 import {
   Box, Button, Card, CardContent,
@@ -24,8 +24,7 @@ const ApplyCoupon = ({ className, ...rest }) => {
   
     const classes = useStyles();
     const { enqueueSnackbar } = useSnackbar();
-
-    // const { loading, error, data } = useQuery(REDEEM_COUPON);
+    const [redeemCoupon, {data, error, loading}] = useMutation(REDEEM_COUPON);
 
    return (
     <Formik
@@ -49,8 +48,9 @@ const ApplyCoupon = ({ className, ...rest }) => {
       }) => {
         try {
 
-        
-         // sending redeem coupon graphql
+          let code = Number(values.code); 
+          
+          redeemCoupon({variables: { code }})
 
           resetForm();
           setStatus({ success: true });

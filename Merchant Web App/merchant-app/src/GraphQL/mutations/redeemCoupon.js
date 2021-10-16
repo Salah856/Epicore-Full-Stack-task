@@ -1,10 +1,11 @@
 import { gql } from '@apollo/client'; 
 
 const REDEEM_COUPON = gql`
-    query getCoupon($code: Number!){
-        getCoupon(code: $code){
+    mutation RedeemCoupon($code: Int!){
+        redeemCoupon(code: $code){
             text
             expiryDate
+            clientID
         }
     }
 `; 
