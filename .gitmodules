@@ -1,0 +1,3 @@
+[submodule "EpicoreMobApp"]
+	path = EpicoreMobApp
+	url = https://github.com/Salah856/Epicore-Full-Stack-task.git
