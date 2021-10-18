@@ -39,7 +39,7 @@ const typeDefs = `
     }
 
     type Subscription {
-      couponRedeemed(code: Code): Coupon
+      couponRedeemed(code: Int): Coupon
     }
     ,
 
