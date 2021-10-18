@@ -7,6 +7,10 @@ Technologies used:
 - React, React Native (Frontend)
 - NodeJS, Express, GraphQL, MongoDB (Backend, API, Database)
 
+### N.B:
+
+You can find the repo of mobile app here: https://github.com/Salah856/EpicoreMobile
+
 
 The app covers these steps: 
 
@@ -100,4 +104,5 @@ CouponSchema in MongoDB:
     }
 
 ```
+
 
