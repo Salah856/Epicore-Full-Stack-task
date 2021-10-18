@@ -29,7 +29,7 @@ const typeDefs = `
     }
 
     type Query {
-      getCouponByFoodItem(foodItemName: String): Coupon
+      getCouponByFoodItem(foodItemName: String, clientID: String): Coupon
     }
 
 
